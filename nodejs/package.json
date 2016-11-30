@@ -1,0 +1,15 @@
+{
+  "name": "long-request",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsforce": "^1.7.1",
+    "moment": "^2.17.0"
+  }
+}
