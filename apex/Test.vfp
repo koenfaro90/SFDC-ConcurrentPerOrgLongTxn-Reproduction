@@ -1,0 +1,13 @@
+<apex:page controller="LongTxn">
+    <script type="text/javascript">
+    function getToken() {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.LongTxn.remoteGet}', 
+            function(result, event){
+                console.log('done!');
+            }
+        );
+    }
+    getToken();
+    </script>
+</apex:page>
