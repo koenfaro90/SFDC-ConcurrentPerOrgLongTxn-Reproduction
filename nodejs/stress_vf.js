@@ -12,14 +12,16 @@ var endDelay = 50000;
 var csrf = '';
 var vid = '';
 var cookie = '';
+var vf_url = 'c.eu11.visual.force.com';
 
 
 class Instance {
-	constructor(csrf, vid, tid, cookie, url) {
+	constructor(csrf, vid, tid, cookie, url, vf_url) {
 		this.csrf = csrf;
 		this.vid = vid;
 		this.cookie = cookie;
 		this.url = url;
+		this.vf_url = vf_url;
 		this.tid = tid;
 		this.payload1 = '{"action":"LongTxn","method":"remoteGet","data":null,"type":"rpc","tid":'+this.tid+',"ctx":{"csrf":"'+this.csrf+'"';
 		this.payload2 = ',"vid":"'+this.vid+'","ns":"","ver":38}}';
@@ -31,15 +33,15 @@ class Instance {
 	start() {
 		var options = {
 			port: 443,
-			hostname: 'c.cs87.visual.force.com',
+			hostname: this.vf_url,
 			path: '/apexremote',
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 				'Transfer-Encoding': 'chunked',
-				'Host': 'c.cs87.visual.force.com',
-				'Origin': 'https://c.cs87.visual.force.com',
-				'Referer': 'https://c.cs87.visual.force.com/apex/Test',
+				'Host': this.vf_url,
+				'Origin': 'https://' + this.vf_url,
+				'Referer': 'https://' + this.vf_url + '/apex/Test',
 				'X-Requested-With': 'XMLHttpRequest',
 				'X-User-Agent': 'X-User-Agent',
 				'Cookie': this.cookie
@@ -85,5 +87,5 @@ var conn = new jsforce.Connection({
 });
 
 for (var i = 0; i < config.numberOfInstances; i++) {
-	instances.push(new Instance(csrf, vid, i + 2, cookie, conn.instanceUrl));
+	instances.push(new Instance(csrf, vid, i + 2, cookie, conn.instanceUrl, vf_url));
 }
